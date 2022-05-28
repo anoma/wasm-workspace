@@ -9,10 +9,10 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-anoma_vp_prelude = {git = "https://github.com/anoma/anoma", rev = "ce0a07598a2bcb90ac67cab2c25e71e32b68193f"}
+anoma_vp_prelude = {git = "https://github.com/anoma/anoma"}
 borsh = "0.9.0"
 wee_alloc = "0.4.5"
 getrandom = { version = "0.2", features = ["custom"] }
 
 [dev-dependencies]
-anoma_tests = {git = "https://github.com/anoma/anoma", rev = "ce0a07598a2bcb90ac67cab2c25e71e32b68193f"}
+anoma_tests = {git = "https://github.com/anoma/anoma"}

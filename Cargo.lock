@@ -40,7 +40,7 @@ dependencies = [
 [[package]]
 name = "anoma"
 version = "0.5.0"
-source = "git+https://github.com/anoma/anoma?rev=ce0a07598a2bcb90ac67cab2c25e71e32b68193f#ce0a07598a2bcb90ac67cab2c25e71e32b68193f"
+source = "git+https://github.com/anoma/anoma#ce0a07598a2bcb90ac67cab2c25e71e32b68193f"
 dependencies = [
  "anoma_proof_of_stake",
  "ark-bls12-381",
@@ -88,7 +88,7 @@ dependencies = [
 [[package]]
 name = "anoma_macros"
 version = "0.5.0"
-source = "git+https://github.com/anoma/anoma?rev=ce0a07598a2bcb90ac67cab2c25e71e32b68193f#ce0a07598a2bcb90ac67cab2c25e71e32b68193f"
+source = "git+https://github.com/anoma/anoma#ce0a07598a2bcb90ac67cab2c25e71e32b68193f"
 dependencies = [
  "quote",
  "syn",
@@ -97,7 +97,7 @@ dependencies = [
 [[package]]
 name = "anoma_proof_of_stake"
 version = "0.5.0"
-source = "git+https://github.com/anoma/anoma?rev=ce0a07598a2bcb90ac67cab2c25e71e32b68193f#ce0a07598a2bcb90ac67cab2c25e71e32b68193f"
+source = "git+https://github.com/anoma/anoma#ce0a07598a2bcb90ac67cab2c25e71e32b68193f"
 dependencies = [
  "borsh",
  "thiserror",
@@ -106,7 +106,7 @@ dependencies = [
 [[package]]
 name = "anoma_tests"
 version = "0.5.0"
-source = "git+https://github.com/anoma/anoma?rev=ce0a07598a2bcb90ac67cab2c25e71e32b68193f#ce0a07598a2bcb90ac67cab2c25e71e32b68193f"
+source = "git+https://github.com/anoma/anoma#ce0a07598a2bcb90ac67cab2c25e71e32b68193f"
 dependencies = [
  "anoma",
  "anoma_vm_env",
@@ -124,7 +124,7 @@ dependencies = [
 [[package]]
 name = "anoma_tx_prelude"
 version = "0.5.0"
-source = "git+https://github.com/anoma/anoma?rev=ce0a07598a2bcb90ac67cab2c25e71e32b68193f#ce0a07598a2bcb90ac67cab2c25e71e32b68193f"
+source = "git+https://github.com/anoma/anoma#ce0a07598a2bcb90ac67cab2c25e71e32b68193f"
 dependencies = [
  "anoma_vm_env",
  "sha2 0.10.2",
@@ -133,7 +133,7 @@ dependencies = [
 [[package]]
 name = "anoma_vm_env"
 version = "0.5.0"
-source = "git+https://github.com/anoma/anoma?rev=ce0a07598a2bcb90ac67cab2c25e71e32b68193f#ce0a07598a2bcb90ac67cab2c25e71e32b68193f"
+source = "git+https://github.com/anoma/anoma#ce0a07598a2bcb90ac67cab2c25e71e32b68193f"
 dependencies = [
  "anoma",
  "anoma_macros",
@@ -144,7 +144,7 @@ dependencies = [
 [[package]]
 name = "anoma_vp_prelude"
 version = "0.5.0"
-source = "git+https://github.com/anoma/anoma?rev=ce0a07598a2bcb90ac67cab2c25e71e32b68193f#ce0a07598a2bcb90ac67cab2c25e71e32b68193f"
+source = "git+https://github.com/anoma/anoma#ce0a07598a2bcb90ac67cab2c25e71e32b68193f"
 dependencies = [
  "anoma_vm_env",
  "sha2 0.10.2",
@@ -3346,3 +3346,18 @@ dependencies = [
  "syn",
  "synstructure",
 ]
+
+[[patch.unused]]
+name = "anoma_tests"
+version = "0.5.0"
+source = "git+https://github.com/anoma/anoma?rev=ce0a07598a2bcb90ac67cab2c25e71e32b68193f#ce0a07598a2bcb90ac67cab2c25e71e32b68193f"
+
+[[patch.unused]]
+name = "anoma_tx_prelude"
+version = "0.5.0"
+source = "git+https://github.com/anoma/anoma?rev=ce0a07598a2bcb90ac67cab2c25e71e32b68193f#ce0a07598a2bcb90ac67cab2c25e71e32b68193f"
+
+[[patch.unused]]
+name = "anoma_vp_prelude"
+version = "0.5.0"
+source = "git+https://github.com/anoma/anoma?rev=ce0a07598a2bcb90ac67cab2c25e71e32b68193f#ce0a07598a2bcb90ac67cab2c25e71e32b68193f"

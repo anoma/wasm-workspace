@@ -13,6 +13,10 @@ borsh = {git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4
 borsh-derive = {git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a"}
 borsh-derive-internal = {git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a"}
 borsh-schema-derive-internal = {git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a"}
+# specify the specific version of Anoma being worked against here
+anoma_tx_prelude = {git = "https://github.com/anoma/anoma", rev = "ce0a07598a2bcb90ac67cab2c25e71e32b68193f"}
+anoma_vp_prelude = {git = "https://github.com/anoma/anoma", rev = "ce0a07598a2bcb90ac67cab2c25e71e32b68193f"}
+anoma_tests = {git = "https://github.com/anoma/anoma", rev = "ce0a07598a2bcb90ac67cab2c25e71e32b68193f"}
 
 [profile.release]
 # smaller and faster wasm (https://rustwasm.github.io/book/reference/code-size.html#compiling-with-link-time-optimizations-lto)
