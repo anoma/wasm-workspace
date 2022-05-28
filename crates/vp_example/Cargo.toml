@@ -1,0 +1,18 @@
+[package]
+name = "vp_example"
+authors = ["Heliax <hello@heliax.dev>"]
+license = "GPL-3.0"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+anoma_vp_prelude = {git = "https://github.com/anoma/anoma", rev = "ce0a07598a2bcb90ac67cab2c25e71e32b68193f"}
+borsh = "0.9.0"
+wee_alloc = "0.4.5"
+getrandom = { version = "0.2", features = ["custom"] }
+
+[dev-dependencies]
+anoma_tests = {git = "https://github.com/anoma/anoma", rev = "ce0a07598a2bcb90ac67cab2c25e71e32b68193f"}
