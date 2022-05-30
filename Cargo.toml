@@ -6,17 +6,25 @@ members = [
 ]
 
 [patch.crates-io]
+# should match wasm/wasm_source/Cargo.toml in the Anoma repo
 tendermint = {git = "https://github.com/heliaxdev/tendermint-rs", branch = "yuji/rebase_v0.23.5"}
+tendermint-light-client-verifier = {git = "https://github.com/heliaxdev/tendermint-rs", branch = "yuji/rebase_v0.23.5"}
 tendermint-proto = {git = "https://github.com/heliaxdev/tendermint-rs", branch = "yuji/rebase_v0.23.5"}
+tendermint-rpc = {git = "https://github.com/heliaxdev/tendermint-rs", branch = "yuji/rebase_v0.23.5"}
+tendermint-testgen = {git = "https://github.com/heliaxdev/tendermint-rs", branch = "yuji/rebase_v0.23.5"}
 # TODO temp patch for <https://github.com/near/borsh-rs/issues/82>, <https://github.com/near/borsh-rs/issues/84> and more tba.
 borsh = {git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a"}
 borsh-derive = {git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a"}
 borsh-derive-internal = {git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a"}
 borsh-schema-derive-internal = {git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a"}
+
+[patch."https://github.com/anoma/anoma"]
 # specify the specific version of Anoma being worked against here
-anoma_tx_prelude = {git = "https://github.com/anoma/anoma", rev = "ce0a07598a2bcb90ac67cab2c25e71e32b68193f"}
-anoma_vp_prelude = {git = "https://github.com/anoma/anoma", rev = "ce0a07598a2bcb90ac67cab2c25e71e32b68193f"}
-anoma_tests = {git = "https://github.com/anoma/anoma", rev = "ce0a07598a2bcb90ac67cab2c25e71e32b68193f"}
+# https://stackoverflow.com/a/72261235/2387626
+anoma_tx_prelude = {git = "https://github.com/anoma/anoma?rev=ce0a07598a2bcb90ac67cab2c25e71e32b68193f"}
+anoma_vp_prelude = {git = "https://github.com/anoma/anoma?rev=ce0a07598a2bcb90ac67cab2c25e71e32b68193f"}
+anoma = {git = "https://github.com/anoma/anoma?rev=ce0a07598a2bcb90ac67cab2c25e71e32b68193f"}
+anoma_tests = {git = "https://github.com/anoma/anoma?rev=ce0a07598a2bcb90ac67cab2c25e71e32b68193f"}
 
 [profile.release]
 # smaller and faster wasm (https://rustwasm.github.io/book/reference/code-size.html#compiling-with-link-time-optimizations-lto)
