@@ -1,0 +1,11 @@
+[target.wasm32-unknown-unknown]
+rustflags = [
+	"-Z", "strip=symbols",
+]
+
+[target.aarch64-apple-darwin]
+# this works - unsure why - https://stackoverflow.com/a/69129557
+rustflags = [
+  "-C", "link-arg=-undefined",
+  "-C", "link-arg=dynamic_lookup",
+]
