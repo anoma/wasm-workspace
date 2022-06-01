@@ -1,16 +1,16 @@
 cargo = $(env) cargo
 
-build:
+debug:
 	$(cargo) -Z unstable-options \
 		build \
 			--target wasm32-unknown-unknown \
 			--out-dir build/debug/
 
-build-release:
+release:
 	$(cargo) -Z unstable-options \
 		build \
 			--release \
 			--target wasm32-unknown-unknown \
 			--out-dir build/release/
 
-.PHONY : build build-release
+.PHONY : debug release
