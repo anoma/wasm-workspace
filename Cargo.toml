@@ -21,10 +21,10 @@ borsh-schema-derive-internal = {git = "https://github.com/heliaxdev/borsh-rs.git
 [patch."https://github.com/anoma/anoma"]
 # specify the specific version of Anoma being worked against here
 # https://stackoverflow.com/a/72261235/2387626
-anoma_tx_prelude = {git = "https://github.com/anoma/anoma?rev=ce0a07598a2bcb90ac67cab2c25e71e32b68193f"}
-anoma_vp_prelude = {git = "https://github.com/anoma/anoma?rev=ce0a07598a2bcb90ac67cab2c25e71e32b68193f"}
-anoma = {git = "https://github.com/anoma/anoma?rev=ce0a07598a2bcb90ac67cab2c25e71e32b68193f"}
-anoma_tests = {git = "https://github.com/anoma/anoma?rev=ce0a07598a2bcb90ac67cab2c25e71e32b68193f"}
+anoma_tx_prelude = {git = "https://github.com/anoma/anoma?rev=v0.6.0"}
+anoma_vp_prelude = {git = "https://github.com/anoma/anoma?rev=v0.6.0"}
+anoma = {git = "https://github.com/anoma/anoma?rev=v0.6.0"}
+anoma_tests = {git = "https://github.com/anoma/anoma?rev=v0.6.0"}
 
 [profile.release]
 # smaller and faster wasm (https://rustwasm.github.io/book/reference/code-size.html#compiling-with-link-time-optimizations-lto)
