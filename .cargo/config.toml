@@ -4,7 +4,14 @@ rustflags = [
 ]
 
 [target.aarch64-apple-darwin]
-# this works - unsure why - https://stackoverflow.com/a/69129557
+# avoids linker errors - https://stackoverflow.com/a/69129557
+rustflags = [
+  "-C", "link-arg=-undefined",
+  "-C", "link-arg=dynamic_lookup",
+]
+
+[target.x86_64-apple-darwin]
+# avoids linker errors - https://stackoverflow.com/a/69129557
 rustflags = [
   "-C", "link-arg=-undefined",
   "-C", "link-arg=dynamic_lookup",
