@@ -6,25 +6,31 @@ members = [
 ]
 
 [patch.crates-io]
-# should match wasm/wasm_source/Cargo.toml in the Anoma repo
-tendermint = {git = "https://github.com/heliaxdev/tendermint-rs", branch = "yuji/rebase_v0.23.5"}
-tendermint-light-client-verifier = {git = "https://github.com/heliaxdev/tendermint-rs", branch = "yuji/rebase_v0.23.5"}
-tendermint-proto = {git = "https://github.com/heliaxdev/tendermint-rs", branch = "yuji/rebase_v0.23.5"}
-tendermint-rpc = {git = "https://github.com/heliaxdev/tendermint-rs", branch = "yuji/rebase_v0.23.5"}
-tendermint-testgen = {git = "https://github.com/heliaxdev/tendermint-rs", branch = "yuji/rebase_v0.23.5"}
-# TODO temp patch for <https://github.com/near/borsh-rs/issues/82>, <https://github.com/near/borsh-rs/issues/84> and more tba.
+# patches here should include patches done by wasm/wasm_source/Cargo.toml in the Namada repo
 borsh = {git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a"}
 borsh-derive = {git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a"}
 borsh-derive-internal = {git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a"}
 borsh-schema-derive-internal = {git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a"}
+# TODO: later versions of chrono pull in wasm-bindgen, which must be avoided, workaround by sticking with v0.4.19 for the moment
+chrono = {git = "https://github.com/chronotope/chrono.git", rev = "v0.4.19"}
 
-[patch."https://github.com/anoma/anoma"]
-# specify the specific version of Anoma being worked against here
+[patch."https://github.com/anoma/namada"]
+# specify the specific version of Namada being worked against here
 # https://stackoverflow.com/a/72261235/2387626
-anoma_tx_prelude = {git = "https://github.com/anoma/anoma?rev=v0.6.0"}
-anoma_vp_prelude = {git = "https://github.com/anoma/anoma?rev=v0.6.0"}
-anoma = {git = "https://github.com/anoma/anoma?rev=v0.6.0"}
-anoma_tests = {git = "https://github.com/anoma/anoma?rev=v0.6.0"}
+namada_tx_prelude = {git = "https://github.com/anoma/namada?rev=v0.7.1"}
+namada_vp_prelude = {git = "https://github.com/anoma/namada?rev=v0.7.1"}
+namada = {git = "https://github.com/anoma/namada?rev=v0.7.1"}
+namada_tests = {git = "https://github.com/anoma/namada?rev=v0.7.1"}
+
+[profile.dev]
+# smaller and faster wasm (https://rustwasm.github.io/book/reference/code-size.html#compiling-with-link-time-optimizations-lto)
+lto = true
+# tell llvm to optimize for size (https://rustwasm.github.io/book/reference/code-size.html#tell-llvm-to-optimize-for-size-instead-of-speed)
+opt-level = 'z'
+
+[profile.test]
+lto = false
+opt-level = 0
 
 [profile.release]
 # smaller and faster wasm (https://rustwasm.github.io/book/reference/code-size.html#compiling-with-link-time-optimizations-lto)
@@ -33,3 +39,4 @@ lto = true
 panic = "abort"
 # tell llvm to optimize for size (https://rustwasm.github.io/book/reference/code-size.html#tell-llvm-to-optimize-for-size-instead-of-speed)
 opt-level = 'z'
+strip = 'symbols'

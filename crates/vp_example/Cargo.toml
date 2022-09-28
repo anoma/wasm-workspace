@@ -2,17 +2,21 @@
 name = "vp_example"
 authors = ["Heliax AG <hello@heliax.dev>"]
 license = "GPL-3.0"
-version = "0.1.0"
+version = "0.0.0"
 edition = "2021"
 
 [lib]
 crate-type = ["cdylib"]
 
 [dependencies]
-anoma_vp_prelude = {git = "https://github.com/anoma/anoma"}
+namada_vp_prelude = {git = "https://github.com/anoma/namada"}
 borsh = "0.9.0"
 wee_alloc = "0.4.5"
+eyre = "0.6.8"
+shared = {path = "../shared" }
 getrandom = { version = "0.2", features = ["custom"] }
 
 [dev-dependencies]
-anoma_tests = {git = "https://github.com/anoma/anoma"}
+namada_tests = {git = "https://github.com/anoma/namada"}
+namada = {git = "https://github.com/anoma/namada"}
+rand = "0.8"

@@ -1,0 +1,9 @@
+[package]
+name = "shared"
+authors = ["Heliax <hello@heliax.dev>"]
+license = "GPL-3.0"
+version = "0.0.0"
+edition = "2021"
+
+[lib]
+crate-type = ["lib"]

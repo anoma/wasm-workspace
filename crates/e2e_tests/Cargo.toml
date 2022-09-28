@@ -1,0 +1,17 @@
+[package]
+name = "e2e_tests"
+authors = ["Heliax <hello@heliax.dev>"]
+license = "GPL-3.0"
+version = "0.0.0"
+edition = "2021"
+
+[[bin]]
+name = "example_test"
+path = "src/bin/example_test/main.rs"
+
+[dependencies]
+test_runner = { git = "https://github.com/anoma/test_runner.git" }
+shared = {path = "../shared" }
+namada = {git = "https://github.com/anoma/namada", features = ["rand"]}
+rand = "0.8"
+eyre = "0.6.8"
