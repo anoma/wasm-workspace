@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+  ledger:
+    build: .
+    platform: linux/amd64
+    ports:
+      - '127.0.0.1:8123:8123'
+      - '127.0.0.1:26657:26657'
+  adhoc:
+    build: .
+    platform: linux/amd64
+    environment:
+      &anoma_env
+      ANOMA_NETWORK_CONFIGS_SERVER: http://ledger:8123
+      ANOMA_LEDGER_ADDRESS: ledger:26657
+    command:
+      - /bin/bash
+      - -c
+      - |
+        tail -F /dev/null
+    depends_on:
+      - ledger
+  testrunner:
+    build: .
+    platform: linux/amd64
+    environment: *anoma_env
+    command:
+      - /bin/bash
+      - -c
+      - |
+        tests/example_test
+    depends_on:
+      - ledger
