@@ -1,7 +1,7 @@
 cargo = $(env) cargo
 
 debug:
-	$(cargo) -Z unstable-options \
+	RUSTUP_TOOLCHAIN="nightly-2022-05-20" $(cargo) -Z unstable-options \
 		build \
 			--workspace \
 			--exclude 'shared' \
@@ -11,7 +11,7 @@ debug:
 			--out-dir build/debug/
 
 release:
-	$(cargo) -Z unstable-options \
+	RUSTUP_TOOLCHAIN="nightly-2022-05-20" $(cargo) -Z unstable-options \
 		build \
 			--workspace \
 			--exclude 'shared' \
@@ -22,7 +22,7 @@ release:
 			--out-dir build/release/
 
 e2e-test-binaries:
-	$(cargo) -Z unstable-options \
+	RUSTUP_TOOLCHAIN="nightly-2022-05-20" $(cargo) -Z unstable-options \
 		build \
 			--target x86_64-unknown-linux-musl \
 			--target-dir build/cache/x86_64-unknown-linux-musl \
