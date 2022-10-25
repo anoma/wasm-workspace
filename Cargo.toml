@@ -1,26 +1,24 @@
 [workspace]
 resolver = "2"
 
-members = [
-  "crates/*",
-]
+members = ["crates/*"]
 
 [patch.crates-io]
 # patches here should include patches done by wasm/wasm_source/Cargo.toml in the Namada repo
-borsh = {git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a"}
-borsh-derive = {git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a"}
-borsh-derive-internal = {git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a"}
-borsh-schema-derive-internal = {git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a"}
+borsh = { git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a" }
+borsh-derive = { git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a" }
+borsh-derive-internal = { git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a" }
+borsh-schema-derive-internal = { git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a" }
 # TODO: later versions of chrono pull in wasm-bindgen, which must be avoided, workaround by sticking with v0.4.19 for the moment
-chrono = {git = "https://github.com/chronotope/chrono.git", rev = "v0.4.19"}
+chrono = { git = "https://github.com/chronotope/chrono.git", rev = "v0.4.19" }
+
+# we need to use a different URL when patching crates from git sources - see https://github.com/rust-lang/cargo/issues/10756>
+[patch."https://github.com/heliaxdev/sparse-merkle-tree"]
+# the branch was updated since namada v0.7.1 was released, this patches it back to a commit that works
+sparse-merkle-tree = { git = "https://github.com/heliaxdev/sparse-merkle-tree?branch=yuji/prost-0.9", rev = "be4b2293558361df2f452c60a3e90c6b5e52e225" }
 
 [patch."https://github.com/anoma/namada"]
-# specify the specific version of Namada being worked against here
-# https://stackoverflow.com/a/72261235/2387626
-namada_tx_prelude = {git = "https://github.com/anoma/namada?rev=v0.7.1"}
-namada_vp_prelude = {git = "https://github.com/anoma/namada?rev=v0.7.1"}
-namada = {git = "https://github.com/anoma/namada?rev=v0.7.1"}
-namada_tests = {git = "https://github.com/anoma/namada?rev=v0.7.1"}
+namada = { git = "https://github.com/anoma/namada?branch=main", tag = "v0.7.1" }
 
 [profile.dev]
 # smaller and faster wasm (https://rustwasm.github.io/book/reference/code-size.html#compiling-with-link-time-optimizations-lto)

@@ -9,14 +9,14 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-namada_vp_prelude = {git = "https://github.com/anoma/namada"}
+namada_vp_prelude = { git = "https://github.com/anoma/namada", tag = "v0.7.1" }
 borsh = "0.9.0"
 wee_alloc = "0.4.5"
 eyre = "0.6.8"
-shared = {path = "../shared" }
+shared = { path = "../shared" }
 getrandom = { version = "0.2", features = ["custom"] }
 
 [dev-dependencies]
-namada_tests = {git = "https://github.com/anoma/namada"}
-namada = {git = "https://github.com/anoma/namada"}
+namada_tests = { git = "https://github.com/anoma/namada", tag = "v0.7.1" }
+namada = { git = "https://github.com/anoma/namada", tag = "v0.7.1" }
 rand = "0.8"
