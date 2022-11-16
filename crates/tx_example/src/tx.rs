@@ -1,5 +1,5 @@
 use eyre::Result;
-use namada_tx_prelude::*;
+use namada_tx_prelude::{log_string, transaction, Ctx, TxResult};
 
 const TX_NAME: &str = "tx_example";
 
@@ -8,14 +8,15 @@ fn log(msg: &str) {
 }
 
 #[transaction]
-fn apply_tx(tx_data: Vec<u8>) {
-    if let Err(err) = apply_tx_aux(tx_data) {
+fn apply_tx(ctx: &mut Ctx, tx_data: Vec<u8>) -> TxResult {
+    if let Err(err) = apply_tx_aux(ctx, tx_data) {
         log(&format!("ERROR: {:?}", err));
-        panic!("{:?}", err)
+        panic!("{:?}", err) // TODO: return an error instead of panicking
     }
+    Ok(())
 }
 
-fn apply_tx_aux(tx_data: Vec<u8>) -> Result<()> {
+fn apply_tx_aux(_ctx: &mut Ctx, tx_data: Vec<u8>) -> Result<()> {
     log_string(format!("apply_tx called with data: {:#?}", tx_data));
     Ok(())
 }
@@ -34,7 +35,7 @@ mod tests {
         tx_host_env::init();
 
         let tx_data = vec![];
-        apply_tx(tx_data);
+        apply_tx(tx_host_env::ctx(), tx_data).unwrap();
 
         let env = tx_host_env::take();
         assert!(env.all_touched_storage_keys().is_empty());

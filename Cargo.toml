@@ -3,22 +3,42 @@ resolver = "2"
 
 members = ["crates/*"]
 
+# these patches come from the root workspace Cargo.toml [patch.crates-io] of the namada repo
 [patch.crates-io]
-# patches here should include patches done by wasm/wasm_source/Cargo.toml in the Namada repo
+# TODO temp patch for <https://github.com/near/borsh-rs/issues/82>, <https://github.com/near/borsh-rs/issues/84> and more tba.
 borsh = { git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a" }
 borsh-derive = { git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a" }
 borsh-derive-internal = { git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a" }
 borsh-schema-derive-internal = { git = "https://github.com/heliaxdev/borsh-rs.git", rev = "cd5223e5103c4f139e0c54cf8259b7ec5ec4073a" }
-# TODO: later versions of chrono pull in wasm-bindgen, which must be avoided, workaround by sticking with v0.4.19 for the moment
-chrono = { git = "https://github.com/chronotope/chrono.git", rev = "v0.4.19" }
+# The following 3 crates patch a work-around for https://github.com/smol-rs/polling/issues/38 breaking namada tooling build with nightly 2022-05-20
+polling = { git = "https://github.com/heliaxdev/polling.git", rev = "02a655775282879459a3460e2646b60c005bca2c" }
+async-io = { git = "https://github.com/heliaxdev/async-io.git", rev = "9285dad39c9a37ecd0dbd498c5ce5b0e65b02489" }
+async-process = { git = "https://github.com/heliaxdev/async-process.git", rev = "e42c527e87d937da9e01aaeb563c0b948580dc89" }
+# borsh = {path = "../borsh-rs/borsh"}
+# borsh-derive = {path = "../borsh-rs/borsh-derive"}
+# borsh-derive-internal = {path = "../borsh-rs/borsh-derive-internal"}
+# borsh-schema-derive-internal = {path = "../borsh-rs/borsh-schema-derive-internal"}
 
-# we need to use a different URL when patching crates from git sources - see https://github.com/rust-lang/cargo/issues/10756>
-[patch."https://github.com/heliaxdev/sparse-merkle-tree"]
-# the branch was updated since namada v0.7.1 was released, this patches it back to a commit that works
-sparse-merkle-tree = { git = "https://github.com/heliaxdev/sparse-merkle-tree?branch=yuji/prost-0.9", rev = "be4b2293558361df2f452c60a3e90c6b5e52e225" }
+# patched to a commit on the `eth-bridge-integration+consensus-timeout` branch of our fork
+tendermint = { git = "https://github.com/heliaxdev/tendermint-rs.git", rev = "e6c684731f21bffd89886d3e91074b96aee074ba" }
+tendermint-config = { git = "https://github.com/heliaxdev/tendermint-rs.git", rev = "e6c684731f21bffd89886d3e91074b96aee074ba" }
+tendermint-proto = { git = "https://github.com/heliaxdev/tendermint-rs.git", rev = "e6c684731f21bffd89886d3e91074b96aee074ba" }
+tendermint-rpc = { git = "https://github.com/heliaxdev/tendermint-rs.git", rev = "e6c684731f21bffd89886d3e91074b96aee074ba" }
+tendermint-testgen = { git = "https://github.com/heliaxdev/tendermint-rs.git", rev = "e6c684731f21bffd89886d3e91074b96aee074ba" }
+tendermint-light-client-verifier = { git = "https://github.com/heliaxdev/tendermint-rs.git", rev = "e6c684731f21bffd89886d3e91074b96aee074ba" }
+
+# patched to a commit on the `eth-bridge-integration` branch of our fork
+ibc = { git = "https://github.com/heliaxdev/ibc-rs.git", rev = "f4703dfe2c1f25cc431279ab74f10f3e0f6827e2" }
+ibc-proto = { git = "https://github.com/heliaxdev/ibc-rs.git", rev = "f4703dfe2c1f25cc431279ab74f10f3e0f6827e2" }
+
+# patched to a commit on the `eth-bridge-integration` branch of our fork
+tower-abci = { git = "https://github.com/heliaxdev/tower-abci.git", rev = "fcc0014d0bda707109901abfa1b2f782d242f082" }
 
 [patch."https://github.com/anoma/namada"]
-namada = { git = "https://github.com/anoma/namada?branch=main", tag = "v0.7.1" }
+namada = { git = "https://github.com/anoma/namada?branch=main", tag = "v0.9.0" }
+namada_tests = { git = "https://github.com/anoma/namada?branch=main", tag = "v0.9.0" }
+namada_tx_prelude = { git = "https://github.com/anoma/namada?branch=main", tag = "v0.9.0" }
+namada_vp_prelude = { git = "https://github.com/anoma/namada?branch=main", tag = "v0.9.0" }
 
 [profile.dev]
 # smaller and faster wasm (https://rustwasm.github.io/book/reference/code-size.html#compiling-with-link-time-optimizations-lto)

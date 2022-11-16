@@ -9,39 +9,40 @@ fn log(msg: &str) {
 
 #[validity_predicate]
 fn validate_tx(
+    ctx: &Ctx,
     tx_data: Vec<u8>,
-    vp_addr: Address,
+    addr: Address,
     keys_changed: BTreeSet<storage::Key>,
     verifiers: BTreeSet<Address>,
-) -> bool {
+) -> VpResult {
     log(&format!(
         "validate_tx called with addr: {}, keys_changed: {:#?}, tx_data: \
          {} bytes, verifiers: {:?}",
-        vp_addr,
+        addr,
         keys_changed,
         tx_data.len(),
         verifiers
     ));
 
-    match validate_tx_aux(tx_data, vp_addr, keys_changed, verifiers) {
-        Ok(result) => result,
+    match validate_tx_aux(ctx, tx_data, addr, keys_changed, verifiers) {
+        Ok(result) => Ok(result),
         Err(err) => {
             log(&format!("ERROR: {:?}", err));
-            panic!("{:?}", err);
+            panic!("{:?}", err); // TODO: don't panic
         }
     }
 }
 
 fn validate_tx_aux(
+    ctx: &Ctx,
     _tx_data: Vec<u8>,
     _vp_addr: Address,
     keys_changed: BTreeSet<storage::Key>,
     _verifiers: BTreeSet<Address>,
 ) -> Result<bool> {
     for key in keys_changed.iter() {
-        let key = key.to_string();
-        let pre: Option<u64> = read_pre(&key);
-        let post: Option<u64> = read_post(&key);
+        let pre = ctx.read_bytes_pre(key);
+        let post = ctx.read_bytes_post(key);
         log_string(format!(
             "validate_tx key: {}, pre: {:#?}, post: {:#?}",
             key, pre, post,
@@ -60,7 +61,9 @@ mod test {
         tx::{tx_host_env, TestTxEnv},
         vp::vp_host_env,
     };
-    use namada_vp_prelude::{address, key::RefTo, storage, token::Amount, BTreeSet};
+    use namada_vp_prelude::{
+        address, key::RefTo, storage, storage_api::StorageWrite, token::Amount, BTreeSet,
+    };
 
     use namada::{proto::Tx, types::key::common::SecretKey};
     use rand::prelude::ThreadRng;
@@ -80,7 +83,7 @@ mod test {
 
         let vp_owner = address::testing::established_address_1();
         let user = address::testing::established_address_2();
-        let token = address::xan();
+        let token = address::nam();
         // allowance must be enough to cover the gas costs of any txs made in this test
         let allowance = Amount::from(10_000_000);
 
@@ -94,7 +97,9 @@ mod test {
                 .unwrap()
                 .push(&"some arbitary key segment".to_string())
                 .unwrap();
-            tx_host_env::write(key_under_vp.to_string(), "some arbitrary value");
+            tx_host_env::ctx()
+                .write(&key_under_vp, "some arbitrary value")
+                .unwrap();
         });
 
         let tx = Tx::new(vec![], None).sign(&random_key());
@@ -104,10 +109,12 @@ mod test {
         let verifiers: BTreeSet<Address> = BTreeSet::default();
         vp_host_env::set(vp_env);
         assert!(validate_tx(
+            vp_host_env::ctx(),
             tx.data.unwrap(),
             vp_owner,
             keys_changed,
             verifiers
-        ));
+        )
+        .unwrap());
     }
 }

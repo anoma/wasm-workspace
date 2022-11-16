@@ -2,7 +2,7 @@
 
 > :warning: This repo is experimental and shouldn't be relied upon!
 
-An example Cargo workspace for building wasms for use with [Anoma](https://github.com/anoma/anoma).
+An example Cargo workspace for building wasms for use with [Namada](https://github.com/anoma/namada).
 
 ## Tests
 
@@ -14,7 +14,7 @@ cargo test
 
 ### End-to-end
 
-End-to-end tests are binaries under `crates/e2e_tests/src/bin`. It should be possible to run them against any Anoma chain.
+End-to-end tests are binaries under `crates/e2e_tests/src/bin`. It should be possible to run them against any Namada chain.
 
 #### Running locally using Docker Compose
 
