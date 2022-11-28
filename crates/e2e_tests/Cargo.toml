@@ -10,7 +10,7 @@ name = "example_test"
 path = "src/bin/example_test/main.rs"
 
 [dependencies]
-test_runner = { git = "https://github.com/anoma/e2e-test-helpers", rev = "8e15f433bf076a30ef1364aee3fdad5ee449e5d7" }
+test_runner = { git = "https://github.com/anoma/e2e-test-helpers", rev = "3326e216f8e0ed9eb3b60558f8081bfcf94bad7f" }
 shared = { path = "../shared" }
 namada = { git = "https://github.com/anoma/namada", features = [
     "rand",

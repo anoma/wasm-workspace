@@ -3,6 +3,7 @@ resolver = "2"
 
 members = ["crates/*"]
 
+
 # these patches come from the root workspace Cargo.toml [patch.crates-io] of the namada repo
 [patch.crates-io]
 # TODO temp patch for <https://github.com/near/borsh-rs/issues/82>, <https://github.com/near/borsh-rs/issues/84> and more tba.
@@ -25,20 +26,25 @@ tendermint-config = { git = "https://github.com/heliaxdev/tendermint-rs.git", re
 tendermint-proto = { git = "https://github.com/heliaxdev/tendermint-rs.git", rev = "e6c684731f21bffd89886d3e91074b96aee074ba" }
 tendermint-rpc = { git = "https://github.com/heliaxdev/tendermint-rs.git", rev = "e6c684731f21bffd89886d3e91074b96aee074ba" }
 tendermint-testgen = { git = "https://github.com/heliaxdev/tendermint-rs.git", rev = "e6c684731f21bffd89886d3e91074b96aee074ba" }
+tendermint-light-client = { git = "https://github.com/heliaxdev/tendermint-rs.git", rev = "e6c684731f21bffd89886d3e91074b96aee074ba" }
 tendermint-light-client-verifier = { git = "https://github.com/heliaxdev/tendermint-rs.git", rev = "e6c684731f21bffd89886d3e91074b96aee074ba" }
 
 # patched to a commit on the `eth-bridge-integration` branch of our fork
 ibc = { git = "https://github.com/heliaxdev/ibc-rs.git", rev = "f4703dfe2c1f25cc431279ab74f10f3e0f6827e2" }
 ibc-proto = { git = "https://github.com/heliaxdev/ibc-rs.git", rev = "f4703dfe2c1f25cc431279ab74f10f3e0f6827e2" }
+ibc-relayer = { git = "https://github.com/heliaxdev/ibc-rs.git", rev = "f4703dfe2c1f25cc431279ab74f10f3e0f6827e2" }
 
 # patched to a commit on the `eth-bridge-integration` branch of our fork
 tower-abci = { git = "https://github.com/heliaxdev/tower-abci.git", rev = "fcc0014d0bda707109901abfa1b2f782d242f082" }
 
+# workaround to <https://github.com/ferrilab/bitvec/issues/199>
+funty = { git = "https://github.com/bitvecto-rs/funty/", rev = "7ef0d890fbcd8b3def1635ac1a877fc298488446" }
+
 [patch."https://github.com/anoma/namada"]
-namada = { git = "https://github.com/anoma/namada?branch=main", tag = "v0.9.0" }
-namada_tests = { git = "https://github.com/anoma/namada?branch=main", tag = "v0.9.0" }
-namada_tx_prelude = { git = "https://github.com/anoma/namada?branch=main", tag = "v0.9.0" }
-namada_vp_prelude = { git = "https://github.com/anoma/namada?branch=main", tag = "v0.9.0" }
+namada = { git = "https://github.com/anoma/namada?branch=main", tag = "v0.10.1" }
+namada_tests = { git = "https://github.com/anoma/namada?branch=main", tag = "v0.10.1" }
+namada_tx_prelude = { git = "https://github.com/anoma/namada?branch=main", tag = "v0.10.1" }
+namada_vp_prelude = { git = "https://github.com/anoma/namada?branch=main", tag = "v0.10.1" }
 
 [profile.dev]
 # smaller and faster wasm (https://rustwasm.github.io/book/reference/code-size.html#compiling-with-link-time-optimizations-lto)
